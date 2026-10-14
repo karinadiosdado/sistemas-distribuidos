@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsString, IsOptional, IsNumber } from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsPositive, isNumber, IsInt, Min } from 'class-validator';
 
 export class CreateProductDto {
 
@@ -10,7 +10,19 @@ export class CreateProductDto {
   @IsOptional()
   @IsString()
   description?: string;// : dan el tipo de dato y ? puede ser opcional 
+  @IsOptional()
+  @IsString()
+  category?: string;
+
   @IsNumber()
-  @Type((()=> Number))
+  @Type((() => Number))
+  @IsInt()
+  @Min(0)
+  stock!: number;
+
+
+  @IsNumber()
+  @Type((() => Number))
+  @IsPositive()
   price!: number;
 }
